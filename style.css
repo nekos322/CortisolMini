@@ -566,6 +566,12 @@ body::before {
   opacity: 1;
   pointer-events: all;
 }
+/* Keep swipe cards non-interactive outside q4.
+   Hidden q4 (opacity: 0) can still intercept clicks otherwise. */
+#screen-q4:not(.active) .swipe-card,
+#screen-q4:not(.active) .swipe-card.top {
+  pointer-events: none !important;
+}
 .swipe-card .card-emoji { font-size: 1.8rem; margin-bottom: 8px; display: block; }
 
 .vote-overlay {

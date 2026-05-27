@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0D0D11" />
+  <title>CORTISOL.EXE ⚡</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="crt-noise"></div>
+  <div class="scanlines"></div>
+
+  <div class="progress-container" id="progress-container">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- ===== BOOT ===== -->
+  <div id="screen-boot" class="screen active">
+    <div class="boot-wrap">
+      <div class="boot-logo">CORTISOL.EXE</div>
+      <div class="boot-terminal" id="boot-terminal"></div>
+      <div class="win98-popup" id="win98-popup">
+        <div class="win98-titlebar">
+          <span>⚠️ System Alert</span>
+          <button class="win98-x" onclick="startQuiz()">✕</button>
+        </div>
+        <div class="win98-body">
+          <div class="win98-icon-big">⚠️</div>
+          <div class="win98-msg">WARNING:<br>Твоя менталочка<br>под угрозой.<br>Запускаем диагностику.</div>
+        </div>
+        <div class="win98-footer">
+          <button class="win98-btn" onclick="startQuiz()">OK</button>
+          <button class="win98-btn" onclick="startQuiz()">Отмена</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Q1: SLEEP ===== -->
+  <div id="screen-q1" class="screen">
+    <div class="q-wrap">
+      <div class="q-num">01 / 08</div>
+      <div class="q-title">СКОЛЬКО ТЫ СПИШЬ?</div>
+      <div class="nokia-wrap">
+        <div class="nokia-phone">
+          <div class="nokia-screen">
+            <div class="nokia-screen-label">BATTERY</div>
+            <div class="nokia-battery-body">
+              <div class="nokia-bars" id="nokia-bars"></div>
+              <div class="nokia-tip"></div>
+            </div>
+            <div class="nokia-hours" id="nokia-hours">6 Ч</div>
+          </div>
+        </div>
+        <div class="sleep-desc" id="sleep-desc">СПЛЮ ЧИСТО ЧТОБЫ НЕ УМЕРЕТЬ</div>
+      </div>
+      <div class="nokia-controls">
+        <button class="pixel-btn" onclick="adjustSleep(-1)">[ - ]</button>
+        <button class="pixel-btn" onclick="adjustSleep(1)">[ + ]</button>
+      </div>
+      <button class="next-btn" onclick="goNext()">ДАЛЬШЕ <span class="arrow">▶</span></button>
+    </div>
+  </div>
+
+  <!-- ===== Q2: COFFEE ===== -->
+  <div id="screen-q2" class="screen">
+    <div class="q-wrap">
+      <div class="q-num">02 / 08</div>
+      <div class="q-title">КОФЕ В ДЕНЬ?</div>
+      <div class="coffee-wrap" id="coffee-wrap">
+        <div class="mug-outer">
+          <div class="mug-body">
+            <div class="mug-fill" id="mug-fill"></div>
+          </div>
+          <div class="mug-handle"></div>
+          <div class="steam-wrap">
+            <span class="steam">〜</span>
+            <span class="steam">〜</span>
+            <span class="steam">〜</span>
+          </div>
+        </div>
+        <div class="coffee-count" id="coffee-count">0 ЧАШЕК</div>
+        <div class="coffee-vibe"  id="coffee-vibe">АБСТИНЕНТ 🙂</div>
+      </div>
+      <button class="coffee-btn" id="coffee-btn" onclick="addCoffee()">+ ЕЩЁ ОДНУ ☕</button>
+      <button class="next-btn" onclick="goNext()">ДАЛЬШЕ <span class="arrow">▶</span></button>
+    </div>
+  </div>
+
+  <!-- ===== Q3: TIKTOK ===== -->
+  <div id="screen-q3" class="screen">
+    <div class="q-wrap">
+      <div class="q-num">03 / 08</div>
+      <div class="q-title">ЧАСОВ В ТИКТОК?</div>
+      <div class="tiktok-wrap">
+        <div class="tiktok-emoji" id="tiktok-emoji">🤡</div>
+        <div class="tiktok-slider-row">
+          <span class="slider-edge">0Ч</span>
+          <div class="tiktok-track-wrap">
+            <input type="range" id="tiktok-slider" class="tiktok-range"
+                   min="0" max="8" value="0" step="0.5"
+                   oninput="updateTiktok(this.value)" />
+          </div>
+          <span class="slider-edge">8Ч</span>
+        </div>
+        <div class="tiktok-val"  id="tiktok-val">0 ЧАСОВ</div>
+        <div class="tiktok-desc" id="tiktok-desc">ЖИВЁТ В РЕАЛЬНОСТИ</div>
+      </div>
+      <button class="next-btn" onclick="goNext()">ДАЛЬШЕ <span class="arrow">▶</span></button>
+    </div>
+  </div>
+
+  <!-- ===== Q4: DEADLINES (Tinder) ===== -->
+  <div id="screen-q4" class="screen">
+    <div class="q-wrap">
+      <div class="q-num">04 / 08</div>
+      <div class="q-title">ЭТО ПРО ТЕБЯ?</div>
+      <div class="swipe-hints">
+        <span class="hint-l">✕ СКИП</span>
+        <span class="hint-r">ЖИЗА ♥</span>
+      </div>
+      <div class="cards-stack" id="cards-stack"></div>
+      <div class="swipe-counter">осталось: <span id="cards-left">5</span></div>
+    </div>
+  </div>
+
+  <!-- ===== Q5: GYM ===== -->
+  <div id="screen-q5" class="screen">
+    <div class="q-wrap">
+      <div class="q-num">05 / 08</div>
+      <div class="q-title">ХОДИШЬ В ЗАЛ?</div>
+      <div class="gym-options">
+        <button class="gym-btn" data-val="0" onclick="selectGym(0, this)">
+          <div class="gym-icon">🛋️</div>
+          <div class="gym-label">НЕТ, Я СПЛЮ</div>
+        </button>
+        <button class="gym-btn" data-val="1" onclick="selectGym(1, this)">
+          <div class="gym-icon">🤔</div>
+          <div class="gym-label">ИНОГДА</div>
+        </button>
+        <button class="gym-btn" data-val="2" onclick="selectGym(2, this)">
+          <div class="gym-icon">💀</div>
+          <div class="gym-label">КАЖДЫЙ<br>ДЕНЬ</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Q6: EARNINGS ===== -->
+  <div id="screen-q6" class="screen">
+    <div class="q-wrap">
+      <div class="q-num">06 / 08</div>
+      <div class="q-title">СКОЛЬКО К ТВОИМ<br>РУКАМ ПРИЛИПАЕТ?</div>
+      <div class="earnings-options" id="earnings-options"></div>
+    </div>
+  </div>
+
+  <!-- ===== Q7: MUSIC ===== -->
+  <div id="screen-q7" class="screen">
+    <div class="q-wrap">
+      <div class="q-num">07 / 08</div>
+      <div class="q-title">КОГО СЛУШАЕШЬ?</div>
+      <div class="music-hint" id="music-hint">тапни по исполнителям</div>
+      <div class="music-grid" id="music-grid"></div>
+      <button class="next-btn" onclick="goNext()">ДАЛЬШЕ <span class="arrow">▶</span></button>
+    </div>
+  </div>
+
+  <!-- ===== Q8: 52 or 67 — CHOOSE YOUR FIGHTER ===== -->
+  <div id="screen-q8" class="screen screen-fighter">
+    <div class="fighter-vs-label">CHOOSE YOUR FIGHTER</div>
+    <div class="fighter-arena">
+      <button class="fighter-btn fighter-52" id="fighter-52" onclick="selectCountry(-8)">
+        <div class="fighter-flag">🇷🇺</div>
+        <div class="fighter-num">52</div>
+        <div class="fighter-sub">СВОЯ АТМОСФЕРА</div>
+      </button>
+      <div class="fighter-vs">VS</div>
+      <button class="fighter-btn fighter-67" id="fighter-67" onclick="selectCountry(8)">
+        <div class="fighter-flag">🇺🇸</div>
+        <div class="fighter-num">67</div>
+        <div class="fighter-sub">АМЕРИКАНСКИЕ ГОРКИ</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== RESULT ===== -->
+  <div id="screen-result" class="screen">
+    <div class="result-wrap" id="result-wrap">
+
+      <div class="res-scan-tag">// CORTISOL.EXE — SCAN COMPLETE //</div>
+      <div class="res-class" id="res-class">NIGHT DRIVE SURVIVOR</div>
+
+      <div class="winamp-wrap">
+        <div class="winamp">
+          <div class="winamp-bar">♦ CORTISOL PLAYER 2.0 ♦ NOW PLAYING: твоя психика.mp3</div>
+          <div class="winamp-body">
+            <div class="winamp-face" id="winamp-face">😐</div>
+            <div class="winamp-eq"   id="winamp-eq"></div>
+            <div class="winamp-pct"  id="res-percent">0%</div>
+          </div>
+          <div class="winamp-controls">◀◀ &nbsp;▶ &nbsp;■ &nbsp;▶▶</div>
+        </div>
+      </div>
+
+      <div class="rpg-grid">
+        <div class="rpg-card rpg-diag">
+          <div class="rpg-label">⚠️ ДИАГНОЗ</div>
+          <div class="rpg-val" id="res-diagnosis">—</div>
+        </div>
+        <div class="rpg-card rpg-mental">
+          <div class="rpg-label">🧠 MENTAL STATE</div>
+          <div class="rpg-val" id="res-mental">—</div>
+        </div>
+        <div class="rpg-card rpg-buff">
+          <div class="rpg-label">✅ БАФФ</div>
+          <div class="rpg-val" id="res-buff">—</div>
+        </div>
+        <div class="rpg-card rpg-debuff">
+          <div class="rpg-label">❌ ДЕБАФФ</div>
+          <div class="rpg-val" id="res-debuff">—</div>
+        </div>
+      </div>
+
+      <div class="receipt">
+        <pre class="receipt-text" id="res-receipt"></pre>
+      </div>
+
+      <button class="share-btn" onclick="shareResult()">📸 ФЛЕКСАНУТЬ В СТОРИС</button>
+      <button class="reset-btn" onclick="resetApp()">↩ ПРОЙТИ ЕЩЁ РАЗ</button>
+
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

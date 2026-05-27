@@ -724,4 +724,50 @@ document.addEventListener('DOMContentLoaded', function() {
   initEarnings();
   initMusic();
   runBoot();
+}// ============================================
+// DEBUG MODE — Диагностика ошибок
+// ============================================
+window.debugMode = true;
+
+function showDebugInfo() {
+  const info = {
+    'addCoffee доступна': typeof addCoffee !== 'undefined',
+    'adjustSleep доступна': typeof adjustSleep !== 'undefined',
+    'state.coffee': state.coffee,
+    'state.sleep': state.sleep,
+    'currentScreen': currentScreen,
+    'Элемент mug-fill': document.getElementById('mug-fill') ? 'OK' : 'MISSING',
+    'Элемент nokia-bars': document.getElementById('nokia-bars') ? 'OK' : 'MISSING',
+    'Кнопка кофе': document.getElementById('coffee-btn') ? 'OK' : 'MISSING',
+  };
+  
+  console.table(info);
+  alert('DEBUG INFO:\n' + JSON.stringify(info, null, 2));
+}
+
+// Добавь дебаг кнопку на экран
+document.addEventListener('DOMContentLoaded', function() {
+  // ... (существующий код)
+  
+  // Добавь в конец:
+  const debugBtn = document.createElement('button');
+  debugBtn.textContent = '🐛 DEBUG';
+  debugBtn.style.cssText = `
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 9999;
+    padding: 8px 12px;
+    background: #FF007A;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 10px;
+    font-family: monospace;
+  `;
+  debugBtn.onclick = showDebugInfo;
+  document.body.appendChild(debugBtn);
 });
+
+window.showDebugInfo = showDebugInfo;);

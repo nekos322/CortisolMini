@@ -716,6 +716,9 @@ window.resetApp = resetApp;
 // ============================================
 // INIT
 // ============================================
+// ============================================
+// INIT
+// ============================================
 document.addEventListener('DOMContentLoaded', function() {
   updateProgress();
   renderNokia();
@@ -724,32 +727,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initEarnings();
   initMusic();
   runBoot();
-}// ============================================
-// DEBUG MODE — Диагностика ошибок
-// ============================================
-window.debugMode = true;
 
-function showDebugInfo() {
-  const info = {
-    'addCoffee доступна': typeof addCoffee !== 'undefined',
-    'adjustSleep доступна': typeof adjustSleep !== 'undefined',
-    'state.coffee': state.coffee,
-    'state.sleep': state.sleep,
-    'currentScreen': currentScreen,
-    'Элемент mug-fill': document.getElementById('mug-fill') ? 'OK' : 'MISSING',
-    'Элемент nokia-bars': document.getElementById('nokia-bars') ? 'OK' : 'MISSING',
-    'Кнопка кофе': document.getElementById('coffee-btn') ? 'OK' : 'MISSING',
-  };
-  
-  console.table(info);
-  alert('DEBUG INFO:\n' + JSON.stringify(info, null, 2));
-}
-
-// Добавь дебаг кнопку на экран
-document.addEventListener('DOMContentLoaded', function() {
-  // ... (существующий код)
-  
-  // Добавь в конец:
+  // Добавь дебаг кнопку на экран
   const debugBtn = document.createElement('button');
   debugBtn.textContent = '🐛 DEBUG';
   debugBtn.style.cssText = `
@@ -770,4 +749,25 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.appendChild(debugBtn);
 });
 
-window.showDebugInfo = showDebugInfo;);
+// ============================================
+// DEBUG MODE — Диагностика ошибок
+// ============================================
+window.debugMode = true;
+
+function showDebugInfo() {
+  const info = {
+    'addCoffee доступна': typeof addCoffee !== 'undefined',
+    'adjustSleep доступна': typeof adjustSleep !== 'undefined',
+    'state.coffee': state.coffee,
+    'state.sleep': state.sleep,
+    'currentScreen': currentScreen,
+    'Элемент mug-fill': document.getElementById('mug-fill') ? 'OK' : 'MISSING',
+    'Элемент nokia-bars': document.getElementById('nokia-bars') ? 'OK' : 'MISSING',
+    'Кнопка кофе': document.getElementById('coffee-btn') ? 'OK' : 'MISSING',
+  };
+  
+  console.table(info);
+  alert('DEBUG INFO:\n' + JSON.stringify(info, null, 2));
+}
+
+window.showDebugInfo = showDebugInfo;

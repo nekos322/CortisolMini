@@ -720,6 +720,25 @@ window.resetApp = resetApp;
 // INIT
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
+  // Disable accidental zoom by double-tap/double-click on mobile browsers.
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function(e) {
+    const now = Date.now();
+    if (now - lastTouchEnd < 320) {
+      e.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, { passive: false });
+
+  document.addEventListener('dblclick', function(e) {
+    e.preventDefault();
+  }, { passive: false });
+
+  // iOS Safari pinch gesture hook.
+  document.addEventListener('gesturestart', function(e) {
+    e.preventDefault();
+  }, { passive: false });
+
   updateProgress();
   renderNokia();
   updateTiktok(0);

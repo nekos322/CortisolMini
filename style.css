@@ -17,6 +17,7 @@
 html, body {
   height: 100%;
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {
@@ -25,6 +26,9 @@ body {
   font-family: var(--font-m);
   -webkit-font-smoothing: antialiased;
   position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  touch-action: manipulation;
 }
 
 /* ===== CRT EFFECTS ===== */
